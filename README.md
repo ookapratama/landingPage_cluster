@@ -9,6 +9,8 @@
 ```
 composer install
 
+npm install
+
 php artisan key:generate
 ```
 
@@ -24,5 +26,9 @@ php artisan migate:fresh --seed
 ## run project
 
 ```
+terminal 1
 php artisan serve
+
+terminal 2
+npm run dev
 ```
