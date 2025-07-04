@@ -24,13 +24,8 @@ class MenuSeeder extends Seeder
 
             // ['name' => 'Rencana Kerja', 'icon' => 'bi-stack', 'url' => 'rencana-kerja', 'index' => 1, 'main_menu' => 'DATA MASTER', 'active' => '1', 'parent' => '2'],
             // ['name' => 'Indikator Kinerja', 'icon' => 'bi-stack', 'url' => 'indikator-kinerja', 'index' => 2, 'main_menu' => 'DATA MASTER', 'active' => '1', 'parent' => '2'],
-            ['name' => 'Surat Masuk', 'icon' => 'bi-stack', 'url' => 'surat-masuk', 'index' => 1, 'main_menu' => 'APPS', 'active' => '1', 'parent' => '1'],
-            ['name' => 'Surat Keluar', 'icon' => 'bi-stack', 'url' => 'surat-keluar', 'index' => 1, 'main_menu' => 'APPS', 'active' => '1', 'parent' => '1'],
-            ['name' => 'Data Arsip', 'icon' => 'bi-stack', 'url' => 'arsip', 'index' => 1, 'main_menu' => 'APPS', 'active' => '1', 'parent' => '1'],
-            ['name' => 'Pencarian', 'icon' => 'bi-stack', 'url' => 'cari-arsip', 'index' => 1, 'main_menu' => 'APPS', 'active' => '1', 'parent' => '1'],
-            ['name' => 'Klasifikasi Arsip dan JRA', 'icon' => 'bi-stack', 'url' => 'data-klasifikasi', 'index' => 1, 'main_menu' => 'APPS', 'active' => '1', 'parent' => '1'],
-            ['name' => 'Pengambilan Nomor Surat', 'icon' => 'bi-stack', 'url' => 'no-surat', 'index' => 1, 'main_menu' => 'APPS', 'active' => '1', 'parent' => '1'],
-            ['name' => 'Log Aktivitas', 'icon' => 'bi-people-fill', 'url' => 'log-aktivitas', 'index' => 1, 'main_menu' => 'APPS', 'active' => '1', 'parent' => '1'],
+            ['name' => 'Cluster', 'icon' => 'bi-stack', 'url' => 'clusters', 'index' => 0, 'main_menu' => 'APPS', 'active' => '1', 'parent' => '1'],
+            // ['name' => 'Log Aktivitas', 'icon' => 'bi-people-fill', 'url' => 'log-aktivitas', 'index' => 1, 'main_menu' => 'APPS', 'active' => '1', 'parent' => '1'],
 
             ['name' => 'User', 'icon' => 'bi-people-fill', 'url' => 'users', 'index' => 0, 'main_menu' => 'USERS', 'active' => '1', 'parent' => '2'],
 

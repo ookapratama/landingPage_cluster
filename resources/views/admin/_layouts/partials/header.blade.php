@@ -91,7 +91,7 @@
                         </i>
                     </a>
                     <!--begin::notifikasi menu-->
-                    <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg menu-state-color fw-semibold py-4 fs-6 w-275px"
+                    {{-- <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg menu-state-color fw-semibold py-4 fs-6 w-275px"
                         data-kt-menu="true" style="max-height: 300px; overflow-y: auto;">
                         <!-- Tambahkan max-height dan overflow -->
                         {!! Helper::suratkadaluarsa() !!}
@@ -103,7 +103,7 @@
 
                         <!-- Add more menu items here if necessary -->
 
-                    </div>
+                    </div> --}}
                     <!--end::notifikasi menu-->
                     <!--end::Menu wrapper-->
                 </div>

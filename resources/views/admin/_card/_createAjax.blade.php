@@ -38,6 +38,7 @@
                                 submitButton.removeAttribute('data-kt-indicator');
                                 submitButton.disabled = false;
                                 toastr.success("Successful save data!");
+                                // console.log(data)
                                 setTimeout(() => {
                                     window.location.replace(
                                         "{{ route($title . '.index') }}"

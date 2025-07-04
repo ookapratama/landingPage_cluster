@@ -22,9 +22,9 @@ class DashboardController extends Controller
     {
         try {
             $data = array(
-                'countMasuk' => surat_masuk::get()->count(),
-                'countKeluar' => surat_keluar::get()->count(),
-                'countArsip' => ArsipSurat::get()->count(),
+                'countMasuk' => 0,
+                'countKeluar' => 0,
+                'countArsip' => 0,
             );
             return view('admin.dashboard', compact('data'));
         } catch (\Exception $e) {

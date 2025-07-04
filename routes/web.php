@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\ArsipSuratController;
 use App\Http\Controllers\Admin\CariArsipController;
+use App\Http\Controllers\Admin\ClusterController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\DataKlasifikasiController;
 use App\Http\Controllers\Admin\LogAktivitasController;
@@ -58,106 +59,14 @@ Route::domain('')->group(function (): void {
 
 
         # APPS 
-        Route::group(['prefix' => '/surat-masuk'], function (): void {
-            Route::get('/', [SuratMasukController::class, 'index'])->name('surat-masuk.index');
-            Route::get('/detail/{id}', [SuratMasukController::class, 'detail'])->name('surat-masuk.detail');
-            Route::get('/data', [SuratMasukController::class, 'data'])->name('surat-masuk.data');
-            Route::get('/create', [SuratMasukController::class, 'create'])->name('surat-masuk.create');
-            Route::post('/store', [SuratMasukController::class, 'store'])->name('surat-masuk.store');
-            Route::get('/{id}/edit', [SuratMasukController::class, 'edit'])->name('surat-masuk.edit');
-            Route::put('/{id}', [SuratMasukController::class, 'update'])->name('surat-masuk.update');
-            Route::delete('/{id}', [SuratMasukController::class, 'destroy'])->name('surat-masuk.delete');
-            Route::get('/export', [SuratMasukController::class, 'export'])->name('surat-masuk.export');
-            Route::get('/cetak', [SuratMasukController::class, 'cetakPdf'])->name('surat-masuk.pdf');
-            Route::get('/arsip/{id}', [SuratMasukController::class, 'storeArsip'])->name('surat-masuk.arsip');
-        });
-
-
-
-        // Arsip surat
-        Route::group(['prefix' => '/arsip'], function (): void {
-            Route::get('/', [ArsipSuratController::class, 'index'])->name('arsip.index');
-            Route::get('/filter', [ArsipSuratController::class, 'filter'])->name('arsip.filter');
-            Route::get('/detail/{id}', [ArsipSuratController::class, 'detail'])->name('arsip.detail');
-            Route::get('/data', [ArsipSuratController::class, 'data'])->name('arsip.data');
-            Route::get('/dashboard/data', [ArsipSuratController::class, 'dataDashboard'])->name('arsip.data.dashboard');
-            Route::get('/dashboard/cetak', [ArsipSuratController::class, 'cetakPdf'])->name('arsip.data.pdf');
-            Route::get('/dashboard/export', [ArsipSuratController::class, 'export'])->name('arsip.data.export');
-            Route::get('/create', [ArsipSuratController::class, 'create'])->name('arsip.create');
-            Route::post('/store', [ArsipSuratController::class, 'store'])->name('arsip.store');
-            Route::get('/{id}/edit', [ArsipSuratController::class, 'edit'])->name('arsip.edit');
-            Route::put('/{id}', [ArsipSuratController::class, 'update'])->name('arsip.update');
-            Route::delete('/{id}', [ArsipSuratController::class, 'destroy'])->name('arsip.delete');
-        });
-
-        // Pencarian arsip surat
-        Route::group(['prefix' => '/cari-arsip'], function (): void {
-            Route::get('/', [CariArsipController::class, 'index'])->name('cari-arsip.index');
-            Route::get('/filter', [CariArsipController::class, 'filter'])->name('cari-arsip.filter');
-            Route::get('/detail/{id}', [CariArsipController::class, 'detail'])->name('cari-arsip.detail');
-            Route::get('/data', [CariArsipController::class, 'data'])->name('cari-arsip.data');
-            Route::get('/dashboard/data', [CariArsipController::class, 'dataDashboard'])->name('cari-arsip.data.dashboard');
-            Route::get('/cetak', [CariArsipController::class, 'cetakPdf'])->name('cari-arsip.data.pdf');
-            Route::get('/export', [CariArsipController::class, 'export'])->name('cari-arsip.data.export');
-            Route::get('/create', [CariArsipController::class, 'create'])->name('cari-arsip.create');
-            Route::post('/store', [CariArsipController::class, 'store'])->name('cari-arsip.store');
-            Route::get('/{id}/edit', [CariArsipController::class, 'edit'])->name('cari-arsip.edit');
-            Route::put('/{id}', [CariArsipController::class, 'update'])->name('cari-arsip.update');
-            Route::delete('/{id}', [CariArsipController::class, 'destroy'])->name('cari-arsip.delete');
-        });
-
-
-
-        Route::group(['prefix' => '/surat-keluar'], function (): void {
-            // Route::get('/', SuratKeluar::class);
-            Route::get('/', [SuratKeluarController::class, 'index'])->name('surat-keluar.index');
-            Route::get('/detail/{id}', [SuratKeluarController::class, 'detail'])->name('surat-keluar.detail');
-            Route::get('/data', [SuratKeluarController::class, 'data'])->name('surat-keluar.data');
-            Route::get('/create', [SuratKeluarController::class, 'create'])->name('surat-keluar.create');
-            Route::post('/store', [SuratKeluarController::class, 'store'])->name('surat-keluar.store');
-            Route::get('/{id}/edit', [SuratKeluarController::class, 'edit'])->name('surat-keluar.edit');
-            Route::put('/{id}', [SuratKeluarController::class, 'update'])->name('surat-keluar.update');
-            Route::delete('/{id}', [SuratKeluarController::class, 'destroy'])->name('surat-keluar.delete');
-            Route::get('/export', [SuratKeluarController::class, 'export'])->name('surat-keluar.export');
-            Route::get('/cetak', [SuratKeluarController::class, 'cetakPdf'])->name('surat-keluar.pdf');
-            Route::post('/last-number', [SuratKeluarController::class, 'getLastNumber'])->name('surat-keluar.last-number');
-            Route::get('/arsip/{id}', [SuratKeluarController::class, 'storeArsip'])->name('surat-keluar.arsip');
-            Route::post('/get-no-surat-data', [SuratKeluarController::class, 'getNoSuratData'])->name('get.no.surat.data');
-
-        });
-
-        // Log aktivitas
-        Route::group(['prefix' => '/log-aktivitas'], function (): void {
-            Route::get('/', [LogAktivitasController::class, 'index'])->name('log-aktivitas.index');
-            Route::get('/data', [LogAktivitasController::class, 'data'])->name('log-aktivitas.data');
-            Route::get('/create', [LogAktivitasController::class, 'create'])->name('log-aktivitas.create');
-            Route::post('/store', [LogAktivitasController::class, 'store'])->name('log-aktivitas.store');
-            Route::get('/{id}/edit', [LogAktivitasController::class, 'edit'])->name('log-aktivitas.edit');
-            Route::put('/{id}', [LogAktivitasController::class, 'update'])->name('log-aktivitas.update');
-            Route::delete('/{id}', [LogAktivitasController::class, 'destroy'])->name('log-aktivitas.delete');
-        });
-
-        // Data klasifikasi
-        Route::group(['prefix' => '/data-klasifikasi'], function (): void {
-            Route::get('/', [DataKlasifikasiController::class, 'index'])->name('data-klasifikasi.index');
-            Route::get('/data', [DataKlasifikasiController::class, 'data'])->name('data-klasifikasi.data');
-            Route::get('/create', [DataKlasifikasiController::class, 'create'])->name('data-klasifikasi.create');
-            Route::post('/store', [DataKlasifikasiController::class, 'store'])->name('data-klasifikasi.store');
-            Route::get('/{id}/edit', [DataKlasifikasiController::class, 'edit'])->name('data-klasifikasi.edit');
-            Route::put('/{id}', [DataKlasifikasiController::class, 'update'])->name('data-klasifikasi.update');
-            Route::delete('/{id}', [DataKlasifikasiController::class, 'destroy'])->name('data-klasifikasi.delete');
-        });
-
-        //no-surat
-        Route::group(['prefix' => '/no-surat'], function (): void {
-            Route::get('/', [NoSuratController::class, 'index'])->name('no-surat.index');
-            Route::get('/data', [NoSuratController::class, 'data'])->name('no-surat.data');
-            Route::get('/create', [NoSuratController::class, 'create'])->name('no-surat.create');
-            Route::post('/store', [NoSuratController::class, 'store'])->name('no-surat.store');
-            Route::get('/{id}/edit', [NoSuratController::class, 'edit'])->name('no-surat.edit');
-            Route::put('/{id}', [NoSuratController::class, 'update'])->name('no-surat.update');
-            Route::delete('/{id}', [NoSuratController::class, 'destroy'])->name('no-surat.delete');
-            Route::post('/last-number', [NoSuratController::class, 'getLastNumber'])->name('no-surat.last-number');
+        Route::group(['prefix' => '/clusters'], function (): void {
+            Route::get('/', [ClusterController::class, 'index'])->name('clusters.index');
+            Route::get('/data', [ClusterController::class, 'data'])->name('clusters.data');
+            Route::get('/create', [ClusterController::class, 'create'])->name('clusters.create');
+            Route::post('/store', [ClusterController::class, 'store'])->name('clusters.store');
+            Route::get('/{id}/edit', [ClusterController::class, 'edit'])->name('clusters.edit');
+            Route::put('/{id}', [ClusterController::class, 'update'])->name('clusters.update');
+            Route::delete('/{id}', [ClusterController::class, 'destroy'])->name('clusters.delete');
         });
 
         # USER SETTING

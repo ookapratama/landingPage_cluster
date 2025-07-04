@@ -145,81 +145,6 @@ class Helper
         // Format rentang waktu
         return $interval->y . ' Tahun';
     }
-    
-    public static function suratkadaluarsa()
-    {
-
-        $suratmasuk = surat_masuk::all();
-        $suratkeluar = surat_keluar::all();
-        $arsipsurat = ArsipSurat::all();
-
-        $expiredSurat = collect();
-
-        $tomorrow = \Carbon\Carbon::today();
-        // $tomorrow = $suratmasuk->tgl_surat;
-
-        foreach ($suratmasuk as $surat) {
-            if ($surat->retensi && strtotime($surat->retensi)) {
-                $retensi = \Carbon\Carbon::parse($surat->retensi);
-                if ($retensi->isPast($tomorrow)) {
-                    $surat->kategori = 'surat masuk';
-                    $expiredSurat->push($surat);
-                }
-            }
-        }
-
-        foreach ($suratkeluar as $surat) {
-            if ($surat->retensi && strtotime($surat->retensi)) {
-                $retensi = \Carbon\Carbon::parse($surat->retensi);
-                if ($retensi->isPast($tomorrow)) {
-                    $surat->kategori = 'surat keluar';
-                    $expiredSurat->push($surat);
-                }
-            }
-        }
-
-        foreach ($arsipsurat as $surat) {
-            $retensi = \Carbon\Carbon::parse($surat->retensi);
-            if ($retensi->isPast($tomorrow)) {
-                $surat->kategori = 'arsip surat';
-                $expiredSurat->push($surat);
-            }
-        }
-
-        $data = '';
-        if ($expiredSurat->isNotEmpty()) {
-            foreach ($expiredSurat as $surat) {
-                $icon = '';
-                // Cek kategori surat
-                if ($surat->kategori == 'surat masuk') {
-                    $icon = '<i class="fas fa-envelope-open-text text-success"></i>'; // Ikon surat masuk
-                } elseif ($surat->kategori == 'surat keluar') {
-                    $icon = '<i class="fas fa-paper-plane text-primary"></i>'; // Ikon surat keluar
-                } elseif ($surat->kategori == 'arsip') {
-                    $icon = '<i class="fas fa-archive text-warning"></i>'; // Ikon arsip
-                }
-                $data .= '<div class="menu-item px-5 d-flex align-items-center">
-        ' . $icon . '
-        <a href="#" class="menu-link px-5 ms-3">
-            ' . ucfirst($surat->kategori) . ' dengan nomor <br>
-            ' . $surat->nomor . ' <br> telah kadaluwarsa
-        </a>
-    </div>
-                    <!--end::Menu item-->
-
-                    <!--begin::Menu separator-->
-                    <div class="separator my-2"></div>';
-            }
-        } else {
-            $data = '<div class="menu-item px-5">
-                        <p class="menu-link px-5">Notifikasi kosong</p>
-                    </div>';
-        }
-
-        return $data;
-    }
-
-    // Usage
 
 
     // get cek menu
@@ -232,22 +157,7 @@ class Helper
     // cek data menu role user
     public static function getData($param)
     {
-        switch ($param) {
-            case 'kd_klasifikasis':
-                // Gunakan model Eloquent untuk KdKlasifikasi dan include relasi 'jenis_klasifikasi'
-                $data = kd_klasifikasi::with('jenis_klasifikasi')->get();
-                break;
-
-            case 'jenis_klasifikasis':
-                // Gunakan model Eloquent untuk JenisKlasifikasi jika diperlukan
-                $data = JenisKlasifikasi::all();
-                break;
-
-            default:
-                // Jika tidak dikenali, fallback ke query builder (tanpa relasi)
-                $data = DB::table($param)->get();
-                break;
-        }
+        $data = DB::table($param)->get();
         return isset($data) ? $data : null;
     }
 
@@ -435,16 +345,16 @@ class Helper
         return isset($data) ? $data->name : '';
     }
 
-    public static function logAuth($activity, $jenis_log, $desc, $id_user)
-    {
-        return log_surat::create([
-            'activity' => $activity,
-            'jenis_log' => $jenis_log,
-            'desc' => $desc,
-            'user_id' => $id_user,
-            'created_at' => date('Y-m-d H:i:s'),
-        ]);
-    }
+    // public static function logAuth($activity, $jenis_log, $desc, $id_user)
+    // {
+    //     return log_surat::create([
+    //         'activity' => $activity,
+    //         'jenis_log' => $jenis_log,
+    //         'desc' => $desc,
+    //         'user_id' => $id_user,
+    //         'created_at' => date('Y-m-d H:i:s'),
+    //     ]);
+    // }
 
     public static function logIcon($activity)
     {

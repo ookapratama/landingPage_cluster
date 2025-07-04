@@ -61,7 +61,7 @@
                             <!--begin::Stats-->
                             <div class="mt-n20 position-relative">
                                 <!--begin::Row-->
-                                <div class="row g-3 g-lg-6">
+                                {{-- <div class="row g-3 g-lg-6">
                                     <!--begin::Col-->
                                     <div class="col-4">
                                         <!--begin::Items-->
@@ -149,9 +149,9 @@
                                         <!--end::Items-->
                                     </div>
                                     <!--end::Col-->
-                                </div>
+                                </div> --}}
                                 <!--end::Row-->
-                                <div class="row mt-3">
+                                {{-- <div class="row mt-3">
                                     <div class="col-md-6 mt-3">
                                         <button id="pedoman" class="btn btn-primary">
                                             <i class="ki-duotone ki-eye text-white fs-2x">
@@ -196,7 +196,7 @@
                                     <embed id="previewTataNaskah"
                                         data-src="{{ asset('uploads/pedoman/PEDOMAN_TATA_NASKAH_DINAS.pdf') }}"
                                         width="100%" height="800" type="application/pdf">
-                                </div>
+                                </div> --}}
 
                             </div>
                             <!--end::Stats-->
@@ -314,93 +314,46 @@
             };
             $pagination.twbsPagination(defaultOpts);
 
-            function loadcetak(search) {
-                $.ajax({
-                    url: '{{ route('arsip.data.pdf') }}',
-                    data: {
-                        "search": search,
-                    },
-                    type: "GET",
-                    datatype: "json",
-                    success: function(data) {
-                        if (data.pdf_url) {
-                            // Buka PDF di tab baru
-                            window.open(data.pdf_url, '_blank');
-                        } else {
-                            console.error("PDF URL tidak ditemukan di respons");
-                        }
-                    },
-                    error: function(error) {
-                        console.error("Error:", error);
-                    }
-                });
-            }
-
-            function loadexport(search) {
-                const url = '{{ route('arsip.data.export') }}' + '?search=' + encodeURIComponent(JSON.stringify(
-                    search));
-                window.open(url, '_blank');
-                return
-            }
-
-
-            function loaddata(page, per_page, search) {
-                $.ajax({
-                    url: '{{ route('arsip' . '.data.dashboard') }}',
-                    data: {
-                        "page": page,
-                        "per_page": per_page,
-                        "search": search,
-                    },
-                    type: "GET",
-                    datatype: "json",
-                    success: function(data) {
-                        $(".datatables").html(data.html);
-                    }
-                });
-            }
-
             function loadpage(per_page, search) {
-                $.ajax({
-                    url: '{{ route('arsip' . '.data.dashboard') }}',
-                    data: {
-                        "per_page": per_page,
-                        "search": search,
-                    },
-                    type: "GET",
-                    datatype: "json",
-                    success: function(response) {
-                        if ($pagination.data("twbs-pagination")) {
-                            $pagination.twbsPagination('destroy');
-                            $(".datatables").html('<tr><td colspan="4">Data not found</td></tr>');
-                        }
-                        $pagination.twbsPagination($.extend({}, defaultOpts, {
-                            startPage: 1,
-                            totalPages: response.total_page,
-                            visiblePages: 8,
-                            prev: '&#8672;',
-                            next: '&#8674;',
-                            first: '&#8676;',
-                            last: '&#8677;',
-                            onPageClick: function(event, page) {
-                                if (page == 1) {
-                                    var to = 1;
-                                } else {
-                                    var to = page * per_page - (per_page - 1);
-                                }
-                                if (page == response.total_page) {
-                                    var end = response.total_data;
-                                } else {
-                                    var end = page * per_page;
-                                }
-                                $('#contentPage').text('Showing ' + to + ' to ' + end +
-                                    ' of ' +
-                                    response.total_data + ' entries');
-                                loaddata(page, per_page, search);
-                            }
-                        }));
-                    }
-                });
+                // $.ajax({
+                //     data: {
+                //         "per_page": per_page,
+                //         "search": search,
+                //     },
+                //     type: "GET",
+                //     datatype: "json",
+                //     success: function(response) {
+                //         if ($pagination.data("twbs-pagination")) {
+                //             $pagination.twbsPagination('destroy');
+                //             $(".datatables").html('<tr><td colspan="4">Data not found</td></tr>');
+                //         }
+                //         $pagination.twbsPagination($.extend({}, defaultOpts, {
+                //             startPage: 1,
+                //             totalPages: response.total_page,
+                //             visiblePages: 8,
+                //             prev: '&#8672;',
+                //             next: '&#8674;',
+                //             first: '&#8676;',
+                //             last: '&#8677;',
+                //             onPageClick: function(event, page) {
+                //                 if (page == 1) {
+                //                     var to = 1;
+                //                 } else {
+                //                     var to = page * per_page - (per_page - 1);
+                //                 }
+                //                 if (page == response.total_page) {
+                //                     var end = response.total_data;
+                //                 } else {
+                //                     var end = page * per_page;
+                //                 }
+                //                 $('#contentPage').text('Showing ' + to + ' to ' + end +
+                //                     ' of ' +
+                //                     response.total_data + ' entries');
+                //                 loaddata(page, per_page, search);
+                //             }
+                //         }));
+                //     }
+                // });
             }
 
             $("#perPage").on('click change', function(event) {
@@ -544,35 +497,6 @@
 
 
             });
-
-            // proses delete data
-            $('body').on('click', '.deleteData', function() {
-                var id = $(this).data("id");
-                Swal.fire({
-                    title: "Are you sure to Delete?",
-                    icon: "question",
-                    showCancelButton: true,
-                    confirmButtonText: "Yes, delete it!"
-                }).then(function(result) {
-                    if (result.value) {
-                        $.ajax({
-                            headers: {
-                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                            },
-                            type: "DELETE",
-                            url: '{{ url('admin/arsip') }}/' + id,
-                            success: function(data) {
-                                loadpage(5, '');
-                                toastr.success("Successful delete data!");
-                            },
-                            error: function(data) {
-                                toastr.error("Failed delete data!");
-                            }
-                        });
-                    }
-                });
-            });
-
 
 
         })

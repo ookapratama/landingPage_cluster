@@ -22,6 +22,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id_role')->after('password');
             $table->foreign('id_role')->references('id')->on('roles');
         });
+
     }
 
     /**
@@ -30,6 +31,10 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('users', function (Blueprint $table) {
+            $table->dropForeign(['id_role']);
+        });
+
+        Schema::table('user_clusters', function (Blueprint $table) {
             $table->dropForeign(['id_role']);
         });
 

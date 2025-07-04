@@ -26,10 +26,11 @@ class DatabaseSeeder extends Seeder
         $this->call(UserSeeder::class);
         $this->call(MenuSeeder::class);
         $this->call(UserMenuSeeder::class);
-        $this->call(JenisKlasifikasi::class);
-        $this->call(KdKlasifikasi::class);
-        $this->call(KdUnit::class);
-        $this->call(AsalSuratSeeder::class);
+        $this->call(UserClusterSeeder::class);
+        // $this->call(JenisKlasifikasi::class);
+        // $this->call(KdKlasifikasi::class);
+        // $this->call(KdUnit::class);
+        // $this->call(AsalSuratSeeder::class);
 
     }
 }
