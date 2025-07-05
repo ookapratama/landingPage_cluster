@@ -1,16 +1,10 @@
 <?php
 
-use App\Http\Controllers\Admin\ArsipSuratController;
-use App\Http\Controllers\Admin\CariArsipController;
 use App\Http\Controllers\Admin\ClusterController;
 use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Admin\DataKlasifikasiController;
-use App\Http\Controllers\Admin\LogAktivitasController;
 use App\Http\Controllers\Admin\MenuController;
-use App\Http\Controllers\Admin\NoSuratController;
-use App\Http\Controllers\Admin\SuratMasukController;
 use App\Http\Controllers\Admin\RoleController;
-use App\Http\Controllers\Admin\SuratKeluarController;
+use App\Http\Controllers\Admin\UserClusterController;
 use App\Http\Controllers\Admin\UserMenuController;
 use App\Http\Controllers\Admin\UsersController;
 use Illuminate\Support\Facades\Route;
@@ -67,6 +61,16 @@ Route::domain('')->group(function (): void {
             Route::get('/{id}/edit', [ClusterController::class, 'edit'])->name('clusters.edit');
             Route::put('/{id}', [ClusterController::class, 'update'])->name('clusters.update');
             Route::delete('/{id}', [ClusterController::class, 'destroy'])->name('clusters.delete');
+        });
+
+        Route::group(['prefix' => '/user-clusters'], function (): void {
+            Route::get('/', [UserClusterController::class, 'index'])->name('user-clusters.index');
+            Route::get('/data', [UserClusterController::class, 'data'])->name('user-clusters.data');
+            Route::get('/create', [UserClusterController::class, 'create'])->name('user-clusters.create');
+            Route::post('/store', [UserClusterController::class, 'store'])->name('user-clusters.store');
+            Route::get('/{id}/edit', [UserClusterController::class, 'edit'])->name('user-clusters.edit');
+            Route::put('/{id}', [UserClusterController::class, 'update'])->name('user-clusters.update');
+            Route::delete('/{id}', [UserClusterController::class, 'destroy'])->name('user-clusters.delete');
         });
 
         # USER SETTING

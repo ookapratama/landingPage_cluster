@@ -161,6 +161,12 @@ class Helper
         return isset($data) ? $data : null;
     }
 
+    public static function getRoleByCriteria($param)
+    {
+        $data = DB::table($param)->where('name', '!=' , 'SuperAdmin')->where('name', '!=' , 'Admin')->get();
+        return isset($data) ? $data : null;
+    }
+
     public static function getDatas($param)
     {
         $data = DB::table($param)->orderby('jenis', 'asc')->get();

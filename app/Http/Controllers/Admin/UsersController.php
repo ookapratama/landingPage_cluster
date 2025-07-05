@@ -65,7 +65,8 @@ class UsersController extends Controller
             $req = $request->all();
             // dd($req);
             $req['password'] = Hash::make($req['password']);
-            // dd($req);
+            // dd($req);            $req = $request->all();
+
             $data = $this->repo->store($req);
             return response()->json(['data' => $data, 'success' => true]);
         } catch (\Exception $e) {

@@ -18,6 +18,7 @@ use App\Http\Services\Repositories\Contracts\PostContract;
 use App\Http\Services\Repositories\Contracts\RoleContract;
 use App\Http\Services\Repositories\Contracts\SuratKeluarContract;
 use App\Http\Services\Repositories\Contracts\SuratMasukContract;
+use App\Http\Services\Repositories\Contracts\UserClusterContract;
 use App\Http\Services\Repositories\Contracts\UserMenuContract;
 use App\Http\Services\Repositories\Contracts\UsersContract;
 use App\Http\Services\Repositories\DataKlasifikasiRepository;
@@ -28,6 +29,7 @@ use App\Http\Services\Repositories\PostRepository;
 use App\Http\Services\Repositories\RoleRepository;
 use App\Http\Services\Repositories\SuratKeluarRepository;
 use App\Http\Services\Repositories\SuratMasukRepository;
+use App\Http\Services\Repositories\UserClusterRepository;
 use App\Http\Services\Repositories\UserMenuRepository;
 use App\Http\Services\Repositories\UsersRepository;
 use Carbon\Carbon;
@@ -56,6 +58,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(UserMenuContract::class, UserMenuRepository::class);
         $this->app->bind(UsersContract::class, UsersRepository::class);
         $this->app->bind(ClusterContract::class, ClusterRepository::class);
+        $this->app->bind(UserClusterContract::class, UserClusterRepository::class);
 
         config(['app.locale' => 'id']);
         Carbon::setLocale('id');
