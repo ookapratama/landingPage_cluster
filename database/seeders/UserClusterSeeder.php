@@ -18,14 +18,14 @@ class UserClusterSeeder extends Seeder
                 'nama' => 'Anggota 1',
                 'akses' => '-',
                 'no_telp' => '0812345678',
-                'url_pict' => 'logo.png',
+                'url_pict' => 'sample.png',
                 'id_role' => 3,
             ],
             [
                 'nama' => 'Anggota 2',
                 'akses' => '-',
                 'no_telp' => '0812345678',
-                'url_pict' => 'logo.png',
+                'url_pict' => 'sample.png',
                 'id_role' => 4,
 
             ],
@@ -33,14 +33,14 @@ class UserClusterSeeder extends Seeder
                 'nama' => 'Anggota 3',
                 'akses' => '-',
                 'no_telp' => '0812345678',
-                'url_pict' => 'logo.png',
+                'url_pict' => 'sample.png',
                 'id_role' => 3,
             ],
             [
                 'nama' => 'Anggota 4',
                 'akses' => '-',
                 'no_telp' => '0812345678',
-                'url_pict' => 'logo.png',
+                'url_pict' => 'sample.png',
                 'id_role' => 4,
             ],
         ];

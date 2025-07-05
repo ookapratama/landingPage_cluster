@@ -34,9 +34,6 @@ return new class extends Migration
             $table->dropForeign(['id_role']);
         });
 
-        Schema::table('user_clusters', function (Blueprint $table) {
-            $table->dropForeign(['id_role']);
-        });
 
         Schema::dropIfExists('roles');
     }

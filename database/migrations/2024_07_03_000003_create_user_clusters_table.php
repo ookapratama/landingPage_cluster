@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('akses');
             $table->string('no_telp');
             $table->string('url_pict');
-            
+            $table->integer('id_role');            
             $table->timestamps();
         });
     }

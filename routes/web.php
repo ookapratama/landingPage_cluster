@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\ClusterController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\LabelClusterController;
 use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserClusterController;
@@ -71,6 +72,16 @@ Route::domain('')->group(function (): void {
             Route::get('/{id}/edit', [UserClusterController::class, 'edit'])->name('user-clusters.edit');
             Route::put('/{id}', [UserClusterController::class, 'update'])->name('user-clusters.update');
             Route::delete('/{id}', [UserClusterController::class, 'destroy'])->name('user-clusters.delete');
+        });
+
+        Route::group(['prefix' => '/label-clusters'], function (): void {
+            Route::get('/', [LabelClusterController::class, 'index'])->name('label-clusters.index');
+            Route::get('/data', [LabelClusterController::class, 'data'])->name('label-clusters.data');
+            Route::get('/create', [LabelClusterController::class, 'create'])->name('label-clusters.create');
+            Route::post('/store', [LabelClusterController::class, 'store'])->name('label-clusters.store');
+            Route::get('/{id}/edit', [LabelClusterController::class, 'edit'])->name('label-clusters.edit');
+            Route::put('/{id}', [LabelClusterController::class, 'update'])->name('label-clusters.update');
+            Route::delete('/{id}', [LabelClusterController::class, 'destroy'])->name('label-clusters.delete');
         });
 
         # USER SETTING

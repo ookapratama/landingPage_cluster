@@ -3,22 +3,21 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Services\Repositories\Contracts\UserClusterContract;
+use App\Http\Services\Repositories\Contracts\LabelClusterContract;
 use App\Models\UserCluster;
 use App\Traits\Uploadable;
 use Illuminate\Http\Request;
 
-class UserClusterController extends Controller
+class LabelClusterController extends Controller
 {
     use Uploadable;
-    protected $title, $repo, $response, $userCluster;
+    protected $title, $repo, $response;
     protected $file_path = 'uploads/anggota-cluster';
 
-    public function __construct(UserClusterContract $repo, UserCluster $userCluster)
+    public function __construct(LabelClusterContract $repo)
     {
-        $this->title = 'user-clusters';
+        $this->title = 'label-clusters';
         $this->repo = $repo;
-        $this->userCluster = $userCluster;
     }
 
     public function index()
@@ -36,16 +35,6 @@ class UserClusterController extends Controller
         try {
             $title = $this->title;
             $data = $this->repo->paginated($request->all());
-            // $anggota = [];
-            // foreach ($data as $key => $value) {
-            //     foreach(explode(',', $value->anggota_cluster) as $a) {
-            //         dump($value->anggota_cluster);
-            //         dump($a);
-            //         $anggota[] = $a;
-            //         dump($anggota);
-            //     }
-            // }
-            // dd($a);
             $perPage = $request->per_page == '' ? 5 : $request->per_page;
             $view = view('admin.' . $title . '.data', compact('data', 'title'))->with('i', ($request->input('page', 1) -
                 1) * $perPage)->render();
@@ -63,7 +52,7 @@ class UserClusterController extends Controller
     {
         try {
             $title = $this->title;
-            return view('admin.' . $title . '.form', compact('title', ));
+            return view('admin.' . $title . '.form', compact('title',));
         } catch (\Exception $e) {
             return view('errors.message', ['message' => $e->getMessage()]);
         }
@@ -74,13 +63,6 @@ class UserClusterController extends Controller
         try {
             $req = $request->all();
 
-            if ($request->hasFile('url_pict')) {
-                $file = $request->file('url_pict')->getClientOriginalName();
-                $file_name = pathinfo($file, PATHINFO_FILENAME);
-                $file_name = $this->uploadFile2($request->file('url_pict'), $this->file_path, '');
-                $req['url_pict'] = $file_name;
-            }
-            // dd($req);
             $data = $this->repo->store($req);
             return response()->json(['data' => $data, 'success' => true]);
         } catch (\Exception $e) {
@@ -104,7 +86,7 @@ class UserClusterController extends Controller
         try {
             $title = $this->title;
             $data = $this->repo->find($id);
-            
+
             return view('admin.' . $title . '.form', compact('title', 'data'));
         } catch (\Exception $e) {
             return response()->json(['message' => $e->getMessage()]);
@@ -115,7 +97,6 @@ class UserClusterController extends Controller
     {
         try {
             $req = $request->all();
-            
             $data = $this->repo->update($req, $request->id);
             // dd($data);
             return response()->json(['data' => $data, 'success' => true]);

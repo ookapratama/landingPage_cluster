@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
         $this->call(MenuSeeder::class);
         $this->call(UserMenuSeeder::class);
         $this->call(UserClusterSeeder::class);
+        $this->call(LabelClusterSeeder::class);
         // $this->call(JenisKlasifikasi::class);
         // $this->call(KdKlasifikasi::class);
         // $this->call(KdUnit::class);
