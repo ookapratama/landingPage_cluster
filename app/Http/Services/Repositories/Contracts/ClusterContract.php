@@ -14,4 +14,5 @@ interface ClusterContract
 	public function paginated(array $request);
 	public function deleteAndCreateByCluster(array $name, $request);
 	public function deleteByCluster($name);
+	public function getAllWithConcat();
 }

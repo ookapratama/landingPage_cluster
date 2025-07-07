@@ -115,7 +115,16 @@ class UserClusterController extends Controller
     {
         try {
             $req = $request->all();
-            
+            $data = $this->repo->find($request->id);
+            // update profile
+            if ($request->hasFile('url_pict')) {
+                $files = $request->file('url_pict')->getClientOriginalName();
+                $files_name = pathinfo($files, PATHINFO_FILENAME);
+                $files_name = $this->uploadFile2($request->file('url_pict'), $this->file_path, $data->url_pict);
+                $req['url_pict'] = $files_name;
+            } else {
+                $req['url_pict'] = $req['url_old'] ?? '';
+            }
             $data = $this->repo->update($req, $request->id);
             // dd($data);
             return response()->json(['data' => $data, 'success' => true]);

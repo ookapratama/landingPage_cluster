@@ -32,7 +32,7 @@
             <div class="card card-flush">
 
                 <!--begin::Card header-->
-                @include('admin._card.action')
+                {{-- @include('admin._card.action') --}}
                 <!--end::Card header-->
 
                 <!--begin::Card body-->

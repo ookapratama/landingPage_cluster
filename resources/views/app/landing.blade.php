@@ -43,11 +43,37 @@
         }
 
         .slider-item {
-            animation: fadeInOut 6s infinite;
+            transition: opacity 1s ease-in-out;
         }
 
-        .slider-item:nth-child(2) {
-            animation-delay: 3s;
+        .slider-item.active {
+            opacity: 1 !important;
+        }
+
+        .h-70 {
+            height: 280px;
+        }
+
+        .cluster-controls {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+        }
+
+        .cluster-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .cluster-dot.active {
+            background-color: white;
         }
     </style>
 </head>
@@ -92,119 +118,126 @@
 
             <!-- Form Section (Below Video) -->
             <section class="bg-white rounded-lg shadow-lg p-6">
-                <h3 class="text-2xl font-bold text-gray-800 mb-4">Form Input Data</h3>
+                {{-- <h3 class="text-2xl font-bold text-gray-800 mb-4">Label</h3> --}}
                 <div class="grid grid-cols-4 gap-6">
-                    <!-- Form A -->
-                    <div class="space-y-3">
-                        <label class="block text-xl font-semibold text-gray-700">A</label>
-                        <input type="text"
-                            class="w-full px-4 py-3 text-lg border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                            placeholder="Input A">
-                    </div>
-
-                    <!-- Form B -->
-                    <div class="space-y-3">
-                        <label class="block text-xl font-semibold text-gray-700">B</label>
-                        <input type="text"
-                            class="w-full px-4 py-3 text-lg border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                            placeholder="Input B">
-                    </div>
-
-                    <!-- Form C -->
-                    <div class="space-y-3">
-                        <label class="block text-xl font-semibold text-gray-700">C</label>
-                        <input type="text"
-                            class="w-full px-4 py-3 text-lg border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                            placeholder="Input C">
-                    </div>
-
-                    <!-- Form D -->
-                    <div class="space-y-3">
-                        <label class="block text-xl font-semibold text-gray-700">D</label>
-                        <input type="text"
-                            class="w-full px-4 py-3 text-lg border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                            placeholder="Input D">
-                    </div>
+                    @foreach ($label as $v)
+                        <div href="#"
+                            class="block max-w-sm p-4 bg-green-500 border border-gray-200 rounded-lg shadow-sm hover:bg-green-400">
+                            <h5 class=" text-white text-2xl">{{ $v->nama }}</h5>
+                            <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700">
+                            <h6 class="mb-2 text-4xl font-bold tracking-tight text-gray-900 dark:text-white">
+                                {{ floatval($v->nilai) . '%' }}
+                            </h6>
+                        </div>
+                    @endforeach
                 </div>
             </section>
         </div>
 
 
         <!-- Cluster Section -->
-        <section class="bg-white col-span-2 space-y-6">
-            <h1 class="text-3xl font-bold text-gray-800 p-3">Cluster A</h1>
-            <div class="bg-blue-300 white rounded-lg shadow-lg mt-5 p-6">
+        {{-- <section class="bg-white col-span-2 space-y-6 max-w-4xl mx-auto">
+            <h1 class="text-3xl font-bold text-gray-800 p-3">Data Cluster</h1>
 
-                <!-- Slider Container -->
-                <div class="relative h-70 overflow-hidden">
-                    <!-- Slide 1 -->
-                    <div class="slider-item absolute inset-0 flex flex-col items-center opacity-0">
-                        <div class="w-32 h-32 bg-gray-300 rounded-lg mb-4 overflow-hidden">
-                            <img src="https://via.placeholder.com/128x128/4A5568/FFFFFF?text=Foto+1" alt="Employee 1"
-                                class="w-full h-full object-cover">
-                        </div>
-                        <div class="text-center space-y-2">
-                            <h3 class="text-xl font-semibold text-gray-800">John Doe</h3>
-                            <p class="text-lg text-gray-600">Manager</p>
-                            <p class="text-base text-gray-500">ID: EMP001</p>
-                            <p class="text-base text-gray-500">Dept: IT</p>
-                        </div>
-                    </div>
-
-                    <!-- Slide 2 -->
-                    <div class="slider-item absolute inset-0 flex flex-col items-center opacity-0">
-                        <div class="w-32 h-32 bg-gray-300 rounded-lg mb-4 overflow-hidden">
-                            <img src="https://via.placeholder.com/128x128/2D3748/FFFFFF?text=Foto+2" alt="Employee 2"
-                                class="w-full h-full object-cover">
-                        </div>
-                        <div class="text-center space-y-2">
-                            <h3 class="text-xl font-semibold text-gray-800">Jane Smith</h3>
-                            <p class="text-lg text-gray-600">Developer</p>
-                            <p class="text-base text-gray-500">ID: EMP002</p>
-                            <p class="text-base text-gray-500">Dept: IT</p>
-                        </div>
-                    </div>
-                </div>
+            <!-- Container untuk semua cluster -->
+            <div id="clustersContainer" class="space-y-6">
+                <!-- Cluster akan ditampilkan di sini secara dinamis -->
             </div>
 
-            <!-- Second Cluster -->
-            <div class="bg-blue-300 rounded-lg shadow-lg p-6">
-                <div class="relative h-70 overflow-hidden">
-                    <!-- Slide 1 -->
-                    <div class="slider-item absolute inset-0 flex flex-col items-center opacity-0">
-                        <div class="w-32 h-32 bg-gray-300 rounded-lg mb-4 overflow-hidden">
-                            <img src="https://via.placeholder.com/128x128/1A202C/FFFFFF?text=Foto+3" alt="Employee 3"
-                                class="w-full h-full object-cover">
-                        </div>
-                        <div class="text-center space-y-2">
-                            <h3 class="text-xl font-semibold text-gray-800">Mike Johnson</h3>
-                            <p class="text-lg text-gray-600">Designer</p>
-                            <p class="text-base text-gray-500">ID: EMP003</p>
-                            <p class="text-base text-gray-500">Dept: Design</p>
-                        </div>
-                    </div>
-
-                    <!-- Slide 2 -->
-                    <div class="slider-item absolute inset-0 flex flex-col items-center opacity-0">
-                        <div class="w-32 h-32 bg-gray-300 rounded-lg mb-4 overflow-hidden">
-                            <img src="https://via.placeholder.com/128x128/2A4A5C/FFFFFF?text=Foto+4" alt="Employee 4"
-                                class="w-full h-full object-cover">
-                        </div>
-                        <div class="text-center space-y-2">
-                            <h3 class="text-xl font-semibold text-gray-800">Sarah Wilson</h3>
-                            <p class="text-lg text-gray-600">Analyst</p>
-                            <p class="text-base text-gray-500">ID: EMP004</p>
-                            <p class="text-base text-gray-500">Dept: Finance</p>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
             <!-- Data Summary -->
             <div class="mt-6 pt-4 border-t border-gray-200">
                 <div class="text-center space-y-1">
-                    <p class="text-lg font-semibold text-gray-700">Total Data: 100</p>
-                    <p class="text-lg font-semibold text-gray-700">Active: 95</p>
+                    <p class="text-lg font-semibold text-gray-700">Total Cluster: <span id="totalCluster">0</span></p>
+                    <p class="text-lg font-semibold text-gray-700">Total Anggota: <span id="totalAnggota">0</span></p>
+                </div>
+            </div>
+        </section> --}}
+
+        <section class="bg-white col-span-2 space-y-6">
+            <div class="cluster-data">
+                {{-- <h1 class="text-3xl font-bold text-gray-800 p-3">Cluster DCC</h1> --}}
+
+                <!-- Main Slider Container -->
+                <div class="relative">
+                    <!-- Slider untuk setiap cluster -->
+                    @foreach ($processCluster as $clusterIndex => $cluster)
+                        <div class="cluster-slide {{ $clusterIndex === 0 ? 'block' : 'hidden' }}"
+                            data-cluster-slide="{{ $clusterIndex }}">
+
+                            <!-- Cluster Header -->
+                            <div class="mb-2 p-3">
+                                <h2 class="text-2xl font-bold text-gray-800">{{ $cluster['nama'] }}</h2>
+                                <p class="text-lg text-gray-600">Shift: {{ $cluster['shift'] }}</p>
+                            </div>
+
+                            <!-- Dua kotak anggota dalam satu slide -->
+                            <div class="">
+                                @foreach ($cluster['anggota'] as $index => $anggota)
+                                    <div class="bg-blue-300 rounded-lg shadow-lg  mb-4">
+                                        <div class="relative h-60 overflow-hidden rounded-lg">
+                                            <div
+                                                class="slider-item absolute inset-0 flex flex-col items-center justify-center opacity-100">
+                                                <div
+                                                    class="w-full h-full bg-gray-300 rounded-lg mb-4 overflow-hidden shadow-lg">
+                                                    <img src="{{ asset('uploads/anggota-cluster/' . $anggota['url_pict']) }}"
+                                                        alt="{{ $anggota['nama'] }}"
+                                                        class="w-full h-full object-contain">
+                                                </div>
+                                                <div class="text-center space-y-2">
+                                                    <h3 class="text-xl font-semibold text-gray-800">
+                                                        {{ $anggota['nama'] }}</h3>
+                                                    <p class="text-lg text-gray-600">{{ $anggota['role'] }}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+
+                        </div>
+                    @endforeach
+
+                    <!-- Navigation Buttons untuk cluster -->
+                    {{-- {{dd($processCluster)}} --}}
+                    @if (count($processCluster) > 1)
+                        <button
+                            class="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-80 hover:bg-opacity-100 rounded-full p-3 shadow-lg transition-all duration-200 z-10"
+                            onclick="previousCluster()">
+                            <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M15 19l-7-7 7-7"></path>
+                            </svg>
+                        </button>
+                        <button
+                            class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-80 hover:bg-opacity-100 rounded-full p-3 shadow-lg transition-all duration-200 z-10"
+                            onclick="nextCluster()">
+                            <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
+                                </path>
+                            </svg>
+                        </button>
+                    @endif
+
+                    <!-- Dots Indicator untuk cluster -->
+                    @if (count($processCluster) > 1)
+                        <div class="flex justify-center mt-6 space-x-2">
+                            @foreach ($processCluster as $clusterIndex => $cluster)
+                                <button
+                                    class="w-3 h-3 rounded-full transition-colors duration-200 {{ $clusterIndex === 0 ? 'bg-blue-500' : 'bg-gray-300' }}"
+                                    onclick="goToCluster({{ $clusterIndex }})"
+                                    data-cluster-dot="{{ $clusterIndex }}"></button>
+                            @endforeach
+                        </div>
+                    @endif
+                </div>
+            </div>
+
+            <!-- Data Summary -->
+            <div class="mt-6 pt-4 border-t border-gray-200">
+                <div class="text-center space-y-1">
+                    <p class="text-lg font-semibold text-gray-700">Total Cluster: {{ count($processCluster) }}</p>
+                    <p class="text-lg font-semibold text-gray-700">Total Anggota:
+                        {{ $processCluster->sum(function ($cluster) {return count($cluster['anggota']);}) }}</p>
                 </div>
             </div>
         </section>
@@ -335,6 +368,79 @@
             setInterval(updateDateTime, 600000);
         });
     </script>
+
+    <script>
+        let currentClusterIndex = 0;
+        let totalClusters = {{ count($processCluster) }};
+
+        function showCluster(clusterIndex) {
+            // Hide all cluster slides
+            document.querySelectorAll('.cluster-slide').forEach(slide => {
+                slide.classList.add('hidden');
+                slide.classList.remove('block');
+            });
+
+            // Show current cluster slide
+            const currentSlide = document.querySelector(`[data-cluster-slide="${clusterIndex}"]`);
+            if (currentSlide) {
+                currentSlide.classList.remove('hidden');
+                currentSlide.classList.add('block');
+            }
+
+            // Update dots
+            document.querySelectorAll('[data-cluster-dot]').forEach((dot, index) => {
+                if (index === clusterIndex) {
+                    dot.classList.remove('bg-gray-300');
+                    dot.classList.add('bg-blue-500');
+                } else {
+                    dot.classList.remove('bg-blue-500');
+                    dot.classList.add('bg-gray-300');
+                }
+            });
+        }
+
+        function nextCluster() {
+            currentClusterIndex = (currentClusterIndex + 1) % totalClusters;
+            showCluster(currentClusterIndex);
+        }
+
+        function previousCluster() {
+            currentClusterIndex = (currentClusterIndex - 1 + totalClusters) % totalClusters;
+            showCluster(currentClusterIndex);
+        }
+
+        function goToCluster(clusterIndex) {
+            currentClusterIndex = clusterIndex;
+            showCluster(currentClusterIndex);
+        }
+
+        // Auto-slide functionality (optional)
+        function startAutoSlide(interval = 5000) {
+            if (totalClusters > 1) {
+                setInterval(() => {
+                    nextCluster();
+                }, interval);
+            }
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight') {
+                nextCluster();
+            } else if (e.key === 'ArrowLeft') {
+                previousCluster();
+            }
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            // Uncomment to enable auto-slide
+            console.log('slide it')
+            // startAutoSlide(4000);
+        });
+    </script>
+
+
 </body>
 
 </html>

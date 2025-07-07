@@ -38,6 +38,24 @@ class ClusterRepository extends BaseRepository implements ClusterContract
 			->paginate($perPage);
 	}
 
+	public function getAllWithConcat()
+	{
+		return $this->model
+			->select(([
+				'clusters.*',
+				DB::raw("GROUP_CONCAT(clusters.user_id) as user_ids"),
+				DB::raw("GROUP_CONCAT(user_clusters.nama) as anggota_cluster"),
+				DB::raw("GROUP_CONCAT(user_clusters.url_pict) as url_pict"),
+				DB::raw("GROUP_CONCAT(roles.name) as role_anggota"),
+			]))
+			->leftJoin('user_clusters', 'user_clusters.id', '=', $this->model->getTable() . '.user_id')
+			->leftJoin('roles', 'roles.id', '=', 'user_clusters.id_role')
+			->groupBy('nama', 'shift')
+			->orderBy('clusters.id', 'desc')
+			// ->limit(1)
+			->get();
+	}
+
 	public function deleteAndCreateByCluster($name, $request)
 	{
 		$oldCluster = $this->model->where('nama', $name)->get();
