@@ -68,7 +68,7 @@
                 <div class="d-flex flex-center flex-xl-start flex-column">
                     <!--begin::Logo-->
                     <a href="#" class="mb-7">
-                        <img alt="Logo" src="{{ asset('/logo/logo-login.png') }}" style="width:100%" />
+                        {{-- <img alt="Logo" src="{{ asset('/logo/logo-login.png') }}" style="width:100%" /> --}}
                     </a>
                     <!--end::Logo-->
                     <!--begin::Title-->
@@ -91,12 +91,12 @@
                             @csrf
                             <!--begin::Heading-->
                             <div class="text-center mb-11">
-                                <img alt="Logo" src="{{ asset('/logo/logo.png') }}"
-                                    class="h-100px " />
+                                {{-- <img alt="Logo" src="{{ asset('/logo/logo.png') }}"
+                                    class="h-100px " /> --}}
 
                                 <!--begin::Title-->
-                                <h1 class="text-gray-900 fw-bolder mb-3"> SISKA </h1>
-                                <h1 class="text-gray-900 fw-bolder mb-3"> SISTEM INFORMASI KEARSIPAN IAIN PAREPARE </h1>
+                                <h1 class="text-gray-900 fw-bolder mb-3"> LOGIN </h1>
+                                {{-- <h1 class="text-gray-900 fw-bolder mb-3"> SISTEM INFORMASI KEARSIPAN IAIN PAREPARE </h1> --}}
                                 <!--end::Title-->
                                 <!--begin::Subtitle-->
                                 <div class="text-gray-500 fw-semibold fs-6">Enter your details to login to your account:

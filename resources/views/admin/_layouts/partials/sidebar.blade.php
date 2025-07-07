@@ -5,9 +5,9 @@
     <div class="app-sidebar-logo px-6" id="kt_app_sidebar_logo">
         <!--begin::Logo image-->
         <a href="#">
-            <img alt="Logo" src="{{ asset('/logo/logo-admin-white.png') }}"
-                class="h-50px app-sidebar-logo-default" />
-            <img alt="Logo" src="{{ asset('/logo/logo.png') }}" class="h-50px app-sidebar-logo-minimize" />
+            {{-- <img alt="Logo" src="{{ asset('/logo/logo-admin-white.png') }}"
+                class="h-50px app-sidebar-logo-default" /> --}}
+            {{-- <img alt="Logo" src="{{ asset('/logo/logo.png') }}" class="h-50px app-sidebar-logo-minimize" /> --}}
         </a>
         <!--end::Logo image-->
 

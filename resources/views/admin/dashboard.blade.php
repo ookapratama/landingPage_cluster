@@ -48,11 +48,11 @@
                         <div class="card-header rounded bgi-no-repeat bgi-size-cover bgi-position-y-top bgi-position-x-center align-items-start h-250px"
                             {{-- style="background-image:url({{ asset('themes/dist/assets/media/svg/shapes/top-green.png') }})" --}} style="background-color: #337ab7" data-bs-theme="light">
                             <!--begin::Title-->
-                            <h3 class="card-title align-items-start flex-column text-white pt-15">
+                            {{-- <h3 class="card-title align-items-start flex-column text-white pt-15">
                                 <span class="fw-bold fs-2x">
                                     Selamat Datang - Kearsipan IAIN Pare-Pare
                                 </span>
-                            </h3>
+                            </h3> --}}
                             <!--end::Title-->
                         </div>
                         <!--end::Heading-->
