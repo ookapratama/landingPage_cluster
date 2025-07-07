@@ -82,7 +82,10 @@
     <!-- Header -->
     <header class="bg-white shadow-md px-8 py-6">
         <div class="flex justify-between items-center">
-            <h1 class="text-4xl font-bold text-gray-800">PT. NAMA PERUSAHAAN</h1>
+            <div class="flex">
+                <img class="w-[80px] me-3" src="{{ asset('sample.png') }}" alt="">
+                <h1 class="text-4xl font-bold text-gray-800 pt-7">PT. NAMA PERUSAHAAN</h1>
+            </div>
             <div class="text-right">
                 <div class="text-2xl font-semibold text-gray-700" id="current-day"></div>
                 <div class="text-xl text-gray-600" id="current-date"></div>
