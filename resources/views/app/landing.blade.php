@@ -439,7 +439,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             // Uncomment to enable auto-slide
             console.log('slide it')
-            // startAutoSlide(4000);
+            startAutoSlide(2000);
         });
     </script>
 
