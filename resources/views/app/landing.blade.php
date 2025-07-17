@@ -267,31 +267,13 @@
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-200">
-                        <tr class="hover:bg-gray-50">
-                            <td class="px-4 py-3 text-base text-gray-600">HR</td>
-                            <td class="px-4 py-3 text-base text-gray-800">Alice Brown</td>
-                            <td class="px-4 py-3 text-base text-gray-800">Pabuno buno</td>
-                        </tr>
-                        <tr class="hover:bg-gray-50">
-                            <td class="px-4 py-3 text-base text-gray-600">Marketing</td>
-                            <td class="px-4 py-3 text-base text-gray-800">Batta'na</td>
-                            <td class="px-4 py-3 text-base text-gray-800">Pabuno buno</td>
-                        </tr>
-                        <tr class="hover:bg-gray-50">
-                            <td class="px-4 py-3 text-base text-gray-600">Sales</td>
-                            <td class="px-4 py-3 text-base text-gray-800">Carol White</td>
-                            <td class="px-4 py-3 text-base text-gray-800">Sampurna</td>
-                        </tr>
-                        <tr class="hover:bg-gray-50">
-                            <td class="px-4 py-3 text-base text-gray-600">Operations</td>
-                            <td class="px-4 py-3 text-base text-gray-800">David Blue</td>
-                            <td class="px-4 py-3 text-base text-gray-800">Surya 16</td>
-                        </tr>
-                        <tr class="hover:bg-gray-50">
-                            <td class="px-4 py-3 text-base text-gray-600">Finance</td>
-                            <td class="px-4 py-3 text-base text-gray-800">Eva Yellow</td>
-                            <td class="px-4 py-3 text-base text-gray-800">Classmild</td>
-                        </tr>
+                        @foreach ($karyawan as $v)
+                            <tr class="hover:bg-gray-50">
+                                <td class="px-4 py-3 text-base text-gray-600">{{ $v->nama_cluster }}</td>
+                                <td class="px-4 py-3 text-base text-gray-600">{{ $v->custody }}</td>
+                                <td class="px-4 py-3 text-base text-gray-600">{{ $v->driver }}</td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -335,15 +317,16 @@
         function initializeSearch() {
             const searchInput = document.querySelector('input[placeholder="Search..."]');
             const tableRows = document.querySelectorAll('tbody tr');
-
+            console.log(tableRows)
             searchInput.addEventListener('input', function() {
                 const searchTerm = this.value.toLowerCase();
 
                 tableRows.forEach(row => {
                     const name = row.querySelector('td:first-child').textContent.toLowerCase();
+                    const custody = row.querySelector('td:first-child+td').textContent.toLowerCase();
                     const dept = row.querySelector('td:last-child').textContent.toLowerCase();
-
-                    if (name.includes(searchTerm) || dept.includes(searchTerm)) {
+                    console.log(custody)
+                    if (name.includes(searchTerm) || dept.includes(searchTerm) || custody.includes(searchTerm)) {
                         row.style.display = '';
                     } else {
                         row.style.display = 'none';

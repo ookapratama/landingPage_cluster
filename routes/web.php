@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\ClusterController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\KaryawanController;
 use App\Http\Controllers\Admin\LabelClusterController;
 use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\RoleController;
@@ -82,6 +83,16 @@ Route::domain('')->group(function (): void {
             Route::get('/{id}/edit', [LabelClusterController::class, 'edit'])->name('label-clusters.edit');
             Route::put('/{id}', [LabelClusterController::class, 'update'])->name('label-clusters.update');
             Route::delete('/{id}', [LabelClusterController::class, 'destroy'])->name('label-clusters.delete');
+        });
+
+        Route::group(['prefix' => '/karyawan'], function (): void {
+            Route::get('/', [KaryawanController::class, 'index'])->name('karyawan.index');
+            Route::get('/data', [KaryawanController::class, 'data'])->name('karyawan.data');
+            Route::get('/create', [KaryawanController::class, 'create'])->name('karyawan.create');
+            Route::post('/store', [KaryawanController::class, 'store'])->name('karyawan.store');
+            Route::get('/{id}/edit', [KaryawanController::class, 'edit'])->name('karyawan.edit');
+            Route::put('/{id}', [KaryawanController::class, 'update'])->name('karyawan.update');
+            Route::delete('/{id}', [KaryawanController::class, 'destroy'])->name('karyawan.delete');
         });
 
         # USER SETTING

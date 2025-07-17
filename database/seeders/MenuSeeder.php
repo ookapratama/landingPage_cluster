@@ -27,6 +27,7 @@ class MenuSeeder extends Seeder
             ['name' => 'Cluster', 'icon' => 'bi-stack', 'url' => 'clusters', 'index' => 0, 'main_menu' => 'APPS', 'active' => '1', 'parent' => '1'],
             ['name' => 'User Clusters', 'icon' => 'bi-stack', 'url' => 'user-clusters', 'index' => 0, 'main_menu' => 'APPS', 'active' => '1', 'parent' => '1'],
             ['name' => 'Label Clusters', 'icon' => 'bi-stack', 'url' => 'label-clusters', 'index' => 0, 'main_menu' => 'APPS', 'active' => '1', 'parent' => '1'],
+            ['name' => 'Anggota', 'icon' => 'bi-stack', 'url' => 'karyawan', 'index' => 0, 'main_menu' => 'APPS', 'active' => '1', 'parent' => '1'],
             // ['name' => 'Log Aktivitas', 'icon' => 'bi-people-fill', 'url' => 'log-aktivitas', 'index' => 1, 'main_menu' => 'APPS', 'active' => '1', 'parent' => '1'],
 
             ['name' => 'User', 'icon' => 'bi-people-fill', 'url' => 'users', 'index' => 0, 'main_menu' => 'USERS', 'active' => '1', 'parent' => '2'],

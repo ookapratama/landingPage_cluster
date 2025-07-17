@@ -3,16 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Http\Services\Repositories\Contracts\ClusterContract;
+use App\Http\Services\Repositories\Contracts\KaryawanContract;
 use App\Models\LabelCluster;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    protected $cluster;
+    protected $cluster, $karyawan;
 
-    public function __construct(ClusterContract $cluster)
+    public function __construct(ClusterContract $cluster, KaryawanContract $karyawan)
     {
         $this->cluster = $cluster;
+        $this->karyawan = $karyawan;
     }
     /**
      * Create a new controller instance.
@@ -68,8 +70,10 @@ class HomeController extends Controller
             ];
         });
 
+        $karyawan = $this->karyawan->paginated([]);
 
-        return view('app.landing', compact('label', 'processCluster'));
+
+        return view('app.landing', compact('label', 'processCluster', 'karyawan'));
     }
 
     public function fotoAnggota($userIds)
